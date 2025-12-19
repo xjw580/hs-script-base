@@ -1,9 +1,7 @@
 package club.xiaojiawei.hsscriptbase.const
 
 import club.xiaojiawei.hsscriptbase.config.log
-import java.util.Locale
-import java.util.Locale.getDefault
-import java.util.Properties
+import java.util.*
 
 /**
  * @author 肖嘉威 xjw580@qq.com
@@ -15,7 +13,7 @@ object BuildInfo {
 
     val ARTIFACT_ID: String
 
-    val PACKAGING_MODE: PackagingModeEnum
+    val SOFT_RUN_MODE: SoftRunMode
 
     init {
         val properties = Properties()
@@ -33,23 +31,30 @@ object BuildInfo {
         }
         VERSION = properties.getProperty("version", "UNKNOWN")
         ARTIFACT_ID = properties.getProperty("artifactId", "UNKNOWN")
-        PACKAGING_MODE = PackagingModeEnum.valueOf(properties.getProperty("packagingMode", PackagingModeEnum.JVM.name))
+        SOFT_RUN_MODE = if (Objects.requireNonNull(javaClass.getResource(""))
+                .protocol == "file"
+        ) {
+            SoftRunMode.FILE
+        } else {
+            SoftRunMode.fromString(properties.getProperty("softRunMode", SoftRunMode.JAR.name))
+        }
     }
 
 
 }
 
-enum class PackagingModeEnum {
-    JVM,
+enum class SoftRunMode {
+    JAR,
     NATIVE,
+    FILE
     ;
 
     companion object {
-        fun fromString(value: String): PackagingModeEnum {
+        fun fromString(value: String): SoftRunMode {
             return try {
                 valueOf(value.uppercase(Locale.ROOT))
             } catch (e: Exception) {
-                JVM
+                JAR
             }
         }
     }
