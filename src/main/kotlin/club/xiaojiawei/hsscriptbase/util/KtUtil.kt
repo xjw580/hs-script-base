@@ -47,3 +47,8 @@ inline fun <T1, T2> withNotNull(a: T1?, b: T2?, block: (T1, T2) -> Unit): Boolea
         false
     }
 }
+
+fun <T> MutableList<T>.setAll(ele: List<T>) {
+    this.clear()
+    this.addAll(ele)
+}

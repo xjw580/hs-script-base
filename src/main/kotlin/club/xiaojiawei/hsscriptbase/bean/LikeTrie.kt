@@ -1,7 +1,6 @@
 package club.xiaojiawei.hsscriptbase.bean
 
 import club.xiaojiawei.hsscriptbase.util.withNotNull
-import kotlin.collections.iterator
 
 /**
  * # Trie树
@@ -97,6 +96,8 @@ class LikeTrie<V>() {
     fun getOrDefault(key: String, defaultValueExp: () -> V): V {
         return getHelper(root, key.lowercase(), 0) ?: defaultValueExp()
     }
+
+    fun getNoDefault(key: String): V? = getHelper(root, key.lowercase(), 0)
 
     /**
      * 获取元素
