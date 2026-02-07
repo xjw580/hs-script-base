@@ -5,12 +5,12 @@
     <parent>
         <groupId>com.github.xjw580.Hearthstone-Script</groupId>
         <artifactId>hs-script</artifactId>
-        <version>v4.14.0-GA</version>
+        <version>v4.14.0.1-BETA</version>
     </parent>
 
     <groupId>com.github.xjw580</groupId>
     <artifactId>hs-script-base</artifactId>
-    <version>1.2.1</version>
+    <version>1.2.2</version>
     <packaging>jar</packaging>
 
     <name>hs-script-base</name>
